@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
+import emailjs from '@emailjs/browser';
 
 export default function BookingForm() {
   const [tab, setTab] = React.useState('noibai');
@@ -31,15 +32,35 @@ export default function BookingForm() {
     return errs;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
     setErrors(errs);
     if (Object.keys(errs).length === 0) {
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 5000);
-      // Reset form nếu muốn:
-      // setPickup(''); setDropoff('Sân Bay Nội Bài'); setTwoWay(false); setInvoice(false); setCarType('4'); setTime(''); setName(''); setPhone('');
+      // Gửi email qua EmailJS
+      try {
+        await emailjs.send(
+          'service_1tus8f5', // Service ID
+          'template_oil8qd8',    // Template ID thật
+          {
+            pickup,
+            dropoff,
+            twoWay: twoWay ? 'Có' : 'Không',
+            invoice: invoice ? 'Có' : 'Không',
+            carType,
+            time,
+            name,
+            phone
+          },
+          'juNHmA2I09YqnCyMD' // Public Key
+        );
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 5000);
+        // Reset form nếu muốn:
+        // setPickup(''); setDropoff(''); setTwoWay(false); setInvoice(false); setCarType('4'); setTime(''); setName(''); setPhone('');
+      } catch (error) {
+        alert('Gửi email thất bại. Vui lòng thử lại!');
+      }
     }
   };
 
