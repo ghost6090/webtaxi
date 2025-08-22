@@ -25,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgzaSBtPwZ3aYVcW3xnNvLTl5uB_KpLiU&libraries=places"
           async
