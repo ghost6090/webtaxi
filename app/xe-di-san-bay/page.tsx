@@ -43,7 +43,9 @@ export default function Page() {
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
           <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
-          <span style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1 }}>0865910922</span>
+          <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+            0865910922
+          </a>
           <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
               <circle cx="16" cy="16" r="16" fill="#fff"/>
