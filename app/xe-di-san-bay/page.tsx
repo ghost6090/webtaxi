@@ -23,13 +23,7 @@ export default function Page() {
   };
 
   // ...existing code...
-  // Scroll to booking form
-  const scrollToBookingForm = useCallback(() => {
-    const el = document.getElementById('booking-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, []);
+  // ...existing code...
 
   return (
     <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
@@ -266,7 +260,7 @@ export default function Page() {
             </div>
             <div style={{ color: '#888', fontSize: 14, fontStyle: 'italic' }}>
               <div style={{ color: '#888', fontSize: 14, fontStyle: 'italic', textAlign: 'justify' }}>
-                (Dịch: "Tôi rất ấn tượng với dịch vụ. Lái xe chuyên nghiệp, nói được tiếng Anh cơ bản và rất đúng giờ. Xe sạch sẽ và thoải mái. Rất đáng giới thiệu!")
+                (Dịch: &quot;Tôi rất ấn tượng với dịch vụ. Lái xe chuyên nghiệp, nói được tiếng Anh cơ bản và rất đúng giờ. Xe sạch sẽ và thoải mái. Rất đáng giới thiệu!&quot;)
               </div>
             </div>
           </div>
