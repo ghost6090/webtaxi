@@ -1,6 +1,611 @@
+"use client";
+
+import React, { useCallback } from "react";
+import { useRouter } from 'next/navigation';
+
+export default function Page() {
+  const router = useRouter();
+  // State cho chatbot floating
+  const [chatOpen, setChatOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([
+    { from: 'bot', text: 'Xin chào, tôi có thể giúp bạn điều gì?' }
+  ]);
+  const [input, setInput] = React.useState('');
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setMessages(msgs => [...msgs, { from: 'user', text: input }]);
+    setTimeout(() => {
+      setMessages(msgs => [...msgs, { from: 'bot', text: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm.' }]);
+    }, 700);
+    setInput('');
+  };
+
+  // Scroll to booking form
+  const scrollToBookingForm = useCallback(() => {
+    const el = document.getElementById('booking-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
+  return (
+    <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <section style={{ textAlign: 'center', padding: '48px 0 24px 0', background: 'none' }}>
+        <h1 style={{ color: '#0a3978', fontWeight: 800, fontSize: 32, marginBottom: 12, fontFamily: 'Segoe UI, Roboto, Arial, sans-serif', letterSpacing: 0.2, textTransform: 'uppercase' }}>
+          DỊCH VỤ XE ĐƯA ĐÓN SÂN BAY NỘI BÀI CHUYÊN NGHIỆP
+        </h1>
+        <div style={{ color: '#35507c', fontSize: 22, marginBottom: 28, fontWeight: 500 }}>
+          An tâm mọi hành trình – Giá tốt, uy tín, phục vụ 24/7
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
+          <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
+          <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+            0865910922
+          </a>
+          <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
+              <circle cx="16" cy="16" r="16" fill="#fff"/>
+              <path d="M16 6C10.477 6 6 10.029 6 15.2c0 2.29 1.01 4.36 2.68 5.97-.12.44-.44 1.62-.51 1.89-.08.28.1.27.21.25.09-.02 1.41-.2 2.77-.38C13.13 23.95 14.54 24.2 16 24.2c5.523 0 10-4.03 10-9.2S21.523 6 16 6Z" fill="#0a97f5"/>
+            </svg>
+            Zalo
+          </a>
+        </div>
+      </section>
+      {/* ƯU ĐÃI ĐẶC BIỆT */}
+      <section style={{ maxWidth: 1100, margin: '48px auto 0', padding: '0 16px' }}>
+          <style>{`
+            @keyframes blink {
+              0%, 90%, 100% { color: #0a3978; text-shadow: 0 2px 8px #fff, 0 0 0 #ff9800; }
+              45% { color: #ff9800; text-shadow: 0 2px 8px #ff9800, 0 0 8px #fff; }
+            }
+          `}</style>
+          <h2 style={{
+            color: '#0a3978',
+            fontSize: 36,
+            fontWeight: 700,
+            textAlign: 'center',
+            marginBottom: 36,
+            fontFamily: 'Playfair Display, serif',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+          }}>KHUYẾN MÃI ĐẶC BIỆT</h2>
+        <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Ưu đãi 1: Chào mừng */}
+          <div style={{ background: '#e3f2fd', borderRadius: 16, boxShadow: '0 2px 8px #90caf933', padding: 32, minWidth: 260, maxWidth: 340, flex: '1 1 260px', display: 'flex', flexDirection: 'column', alignItems: 'center', fontFamily: 'inherit', position: 'relative' }}>
+            <span style={{ position: 'absolute', top: 18, left: 18 }}>
+              {/* Icon: 🎉 */}
+              <span style={{ fontSize: 32 }}>🎉</span>
+            </span>
+            <div style={{ fontWeight: 900, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 0.2, fontFamily: 'Playfair Display, serif' }}>Ưu đãi Chào mừng</div>
+            <div style={{ fontWeight: 700, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center' }}>Giảm ngay 10% cho chuyến đi đầu tiên của bạn!</div>
+            <div style={{ color: '#35507c', fontSize: 16, marginBottom: 18, textAlign: 'justify', fontWeight: 400, lineHeight: 1.7 }}>
+             Là thành viên mới, bạn sẽ được nhận ưu đãi đặc biệt này. Tiết kiệm chi phí cho chuyến đi đầu tiên, bắt đầu trải nghiệm dịch vụ chuyên nghiệp của chúng tôi ngay hôm nay.
+            </div>
+            <button onClick={() => router.push('/xe-di-san-bay/form')} style={{
+              background: '#0a3978',
+              color: '#fff',
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 700,
+              fontSize: 20,
+              border: 'none',
+              borderRadius: 8,
+              padding: '16px 0',
+              width: '100%',
+              cursor: 'pointer',
+              marginTop: 'auto',
+              boxShadow: '0 2px 8px #0a397822',
+              letterSpacing: 1.2,
+              textTransform: 'uppercase',
+              transition: 'background 0.2s',
+            }}>ĐẶT XE NGAY</button>
+          </div>
+          {/* ...rest of the file from app/xe-di-san-bay/page.tsx... */}
+        </div>
+      </section>
+    </main>
+  );
+}
+"use client";
+
+import React, { useCallback } from "react";
+import { useRouter } from 'next/navigation';
+
+export default function Page() {
+  const router = useRouter();
+  // State cho chatbot floating
+  const [chatOpen, setChatOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([
+    { from: 'bot', text: 'Xin chào, tôi có thể giúp bạn điều gì?' }
+  ]);
+  const [input, setInput] = React.useState('');
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setMessages(msgs => [...msgs, { from: 'user', text: input }]);
+    setTimeout(() => {
+      setMessages(msgs => [...msgs, { from: 'bot', text: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm.' }]);
+    }, 700);
+    setInput('');
+  };
+
+  // Scroll to booking form
+  const scrollToBookingForm = useCallback(() => {
+    const el = document.getElementById('booking-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
+  return (
+    <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <section style={{ textAlign: 'center', padding: '48px 0 24px 0', background: 'none' }}>
+        <h1 style={{ color: '#0a3978', fontWeight: 800, fontSize: 32, marginBottom: 12, fontFamily: 'Segoe UI, Roboto, Arial, sans-serif', letterSpacing: 0.2, textTransform: 'uppercase' }}>
+          DỊCH VỤ XE ĐƯA ĐÓN SÂN BAY NỘI BÀI CHUYÊN NGHIỆP
+        </h1>
+        <div style={{ color: '#35507c', fontSize: 22, marginBottom: 28, fontWeight: 500 }}>
+          An tâm mọi hành trình – Giá tốt, uy tín, phục vụ 24/7
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
+          <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
+          <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+            0865910922
+          </a>
+          <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
+              <circle cx="16" cy="16" r="16" fill="#fff"/>
+              <path d="M16 6C10.477 6 6 10.029 6 15.2c0 2.29 1.01 4.36 2.68 5.97-.12.44-.44 1.62-.51 1.89-.08.28.1.27.21.25.09-.02 1.41-.2 2.77-.38C13.13 23.95 14.54 24.2 16 24.2c5.523 0 10-4.03 10-9.2S21.523 6 16 6Z" fill="#0a97f5"/>
+            </svg>
+            Zalo
+          </a>
+        </div>
+      </section>
+      {/* ƯU ĐÃI ĐẶC BIỆT */}
+      <section style={{ maxWidth: 1100, margin: '48px auto 0', padding: '0 16px' }}>
+          <style>{`
+            @keyframes blink {
+              0%, 90%, 100% { color: #0a3978; text-shadow: 0 2px 8px #fff, 0 0 0 #ff9800; }
+              45% { color: #ff9800; text-shadow: 0 2px 8px #ff9800, 0 0 8px #fff; }
+            }
+          `}</style>
+          <h2 style={{
+            color: '#0a3978',
+            fontSize: 36,
+            fontWeight: 700,
+            textAlign: 'center',
+            marginBottom: 36,
+            fontFamily: 'Playfair Display, serif',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+          }}>KHUYẾN MÃI ĐẶC BIỆT</h2>
+        <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Ưu đãi 1: Chào mừng */}
+          <div style={{ background: '#e3f2fd', borderRadius: 16, boxShadow: '0 2px 8px #90caf933', padding: 32, minWidth: 260, maxWidth: 340, flex: '1 1 260px', display: 'flex', flexDirection: 'column', alignItems: 'center', fontFamily: 'inherit', position: 'relative' }}>
+            <span style={{ position: 'absolute', top: 18, left: 18 }}>
+              {/* Icon: 🎉 */}
+              <span style={{ fontSize: 32 }}>🎉</span>
+            </span>
+            <div style={{ fontWeight: 900, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 0.2, fontFamily: 'Playfair Display, serif' }}>Ưu đãi Chào mừng</div>
+            <div style={{ fontWeight: 700, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center' }}>Giảm ngay 10% cho chuyến đi đầu tiên của bạn!</div>
+            <div style={{ color: '#35507c', fontSize: 16, marginBottom: 18, textAlign: 'justify', fontWeight: 400, lineHeight: 1.7 }}>
+             Là thành viên mới, bạn sẽ được nhận ưu đãi đặc biệt này. Tiết kiệm chi phí cho chuyến đi đầu tiên, bắt đầu trải nghiệm dịch vụ chuyên nghiệp của chúng tôi ngay hôm nay.
+            </div>
+            <button onClick={() => router.push('/xe-di-san-bay/form')} style={{
+              background: '#0a3978',
+              color: '#fff',
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 700,
+              fontSize: 20,
+              border: 'none',
+              borderRadius: 8,
+              padding: '16px 0',
+              width: '100%',
+              cursor: 'pointer',
+              marginTop: 'auto',
+              boxShadow: '0 2px 8px #0a397822',
+              letterSpacing: 1.2,
+              textTransform: 'uppercase',
+              transition: 'background 0.2s',
+            }}>ĐẶT XE NGAY</button>
+          </div>
+          {/* ...rest of the file from app/xe-di-san-bay/page.tsx... */}
+        </div>
+      </section>
+    </main>
+  );
+}
+"use client";
+
+import React, { useCallback } from "react";
+import { useRouter } from 'next/navigation';
+
+export default function Page() {
+  const router = useRouter();
+  // State cho chatbot floating
+  const [chatOpen, setChatOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([
+    { from: 'bot', text: 'Xin chào, tôi có thể giúp bạn điều gì?' }
+  ]);
+  const [input, setInput] = React.useState('');
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setMessages(msgs => [...msgs, { from: 'user', text: input }]);
+    setTimeout(() => {
+      setMessages(msgs => [...msgs, { from: 'bot', text: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm.' }]);
+    }, 700);
+    setInput('');
+  };
+
+  // Scroll to booking form
+  const scrollToBookingForm = useCallback(() => {
+    const el = document.getElementById('booking-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
+  return (
+    <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <section style={{ textAlign: 'center', padding: '48px 0 24px 0', background: 'none' }}>
+        <h1 style={{ color: '#0a3978', fontWeight: 800, fontSize: 32, marginBottom: 12, fontFamily: 'Segoe UI, Roboto, Arial, sans-serif', letterSpacing: 0.2, textTransform: 'uppercase' }}>
+          DỊCH VỤ XE ĐƯA ĐÓN SÂN BAY NỘI BÀI CHUYÊN NGHIỆP
+        </h1>
+        <div style={{ color: '#35507c', fontSize: 22, marginBottom: 28, fontWeight: 500 }}>
+          An tâm mọi hành trình – Giá tốt, uy tín, phục vụ 24/7
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
+          <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
+          <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+            0865910922
+          </a>
+          <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
+              <circle cx="16" cy="16" r="16" fill="#fff"/>
+              <path d="M16 6C10.477 6 6 10.029 6 15.2c0 2.29 1.01 4.36 2.68 5.97-.12.44-.44 1.62-.51 1.89-.08.28.1.27.21.25.09-.02 1.41-.2 2.77-.38C13.13 23.95 14.54 24.2 16 24.2c5.523 0 10-4.03 10-9.2S21.523 6 16 6Z" fill="#0a97f5"/>
+            </svg>
+            Zalo
+          </a>
+        </div>
+      </section>
+      {/* ƯU ĐÃI ĐẶC BIỆT */}
+      <section style={{ maxWidth: 1100, margin: '48px auto 0', padding: '0 16px' }}>
+          <style>{`
+            @keyframes blink {
+              0%, 90%, 100% { color: #0a3978; text-shadow: 0 2px 8px #fff, 0 0 0 #ff9800; }
+              45% { color: #ff9800; text-shadow: 0 2px 8px #ff9800, 0 0 8px #fff; }
+            }
+          `}</style>
+          <h2 style={{
+            color: '#0a3978',
+            fontSize: 36,
+            fontWeight: 700,
+            textAlign: 'center',
+            marginBottom: 36,
+            fontFamily: 'Playfair Display, serif',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+          }}>KHUYẾN MÃI ĐẶC BIỆT</h2>
+        <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Ưu đãi 1: Chào mừng */}
+          <div style={{ background: '#e3f2fd', borderRadius: 16, boxShadow: '0 2px 8px #90caf933', padding: 32, minWidth: 260, maxWidth: 340, flex: '1 1 260px', display: 'flex', flexDirection: 'column', alignItems: 'center', fontFamily: 'inherit', position: 'relative' }}>
+            <span style={{ position: 'absolute', top: 18, left: 18 }}>
+              {/* Icon: 🎉 */}
+              <span style={{ fontSize: 32 }}>🎉</span>
+            </span>
+            <div style={{ fontWeight: 900, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 0.2, fontFamily: 'Playfair Display, serif' }}>Ưu đãi Chào mừng</div>
+            <div style={{ fontWeight: 700, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center' }}>Giảm ngay 10% cho chuyến đi đầu tiên của bạn!</div>
+            <div style={{ color: '#35507c', fontSize: 16, marginBottom: 18, textAlign: 'justify', fontWeight: 400, lineHeight: 1.7 }}>
+             Là thành viên mới, bạn sẽ được nhận ưu đãi đặc biệt này. Tiết kiệm chi phí cho chuyến đi đầu tiên, bắt đầu trải nghiệm dịch vụ chuyên nghiệp của chúng tôi ngay hôm nay.
+            </div>
+            <button onClick={() => router.push('/xe-di-san-bay/form')} style={{
+              background: '#0a3978',
+              color: '#fff',
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 700,
+              fontSize: 20,
+              border: 'none',
+              borderRadius: 8,
+              padding: '16px 0',
+              width: '100%',
+              cursor: 'pointer',
+              marginTop: 'auto',
+              boxShadow: '0 2px 8px #0a397822',
+              letterSpacing: 1.2,
+              textTransform: 'uppercase',
+              transition: 'background 0.2s',
+            }}>ĐẶT XE NGAY</button>
+          </div>
+          {/* ...rest of the file from app/xe-di-san-bay/page.tsx... */}
+        </div>
+      </section>
+    </main>
+  );
+}
+"use client";
+
+import React, { useCallback } from "react";
+import { useRouter } from 'next/navigation';
+
+export default function Page() {
+  const router = useRouter();
+  // State cho chatbot floating
+  const [chatOpen, setChatOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([
+    { from: 'bot', text: 'Xin chào, tôi có thể giúp bạn điều gì?' }
+  ]);
+  const [input, setInput] = React.useState('');
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setMessages(msgs => [...msgs, { from: 'user', text: input }]);
+    setTimeout(() => {
+      setMessages(msgs => [...msgs, { from: 'bot', text: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm.' }]);
+    }, 700);
+    setInput('');
+  };
+
+  // Scroll to booking form
+  const scrollToBookingForm = useCallback(() => {
+    const el = document.getElementById('booking-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
+  return (
+    <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <section style={{ textAlign: 'center', padding: '48px 0 24px 0', background: 'none' }}>
+        <h1 style={{ color: '#0a3978', fontWeight: 800, fontSize: 32, marginBottom: 12, fontFamily: 'Segoe UI, Roboto, Arial, sans-serif', letterSpacing: 0.2, textTransform: 'uppercase' }}>
+          DỊCH VỤ XE ĐƯA ĐÓN SÂN BAY NỘI BÀI CHUYÊN NGHIỆP
+        </h1>
+        <div style={{ color: '#35507c', fontSize: 22, marginBottom: 28, fontWeight: 500 }}>
+          An tâm mọi hành trình – Giá tốt, uy tín, phục vụ 24/7
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
+          <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
+          <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+            0865910922
+          </a>
+          <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
+              <circle cx="16" cy="16" r="16" fill="#fff"/>
+              <path d="M16 6C10.477 6 6 10.029 6 15.2c0 2.29 1.01 4.36 2.68 5.97-.12.44-.44 1.62-.51 1.89-.08.28.1.27.21.25.09-.02 1.41-.2 2.77-.38C13.13 23.95 14.54 24.2 16 24.2c5.523 0 10-4.03 10-9.2S21.523 6 16 6Z" fill="#0a97f5"/>
+            </svg>
+            Zalo
+          </a>
+        </div>
+      </section>
+      {/* ƯU ĐÃI ĐẶC BIỆT */}
+      <section style={{ maxWidth: 1100, margin: '48px auto 0', padding: '0 16px' }}>
+          <style>{`
+            @keyframes blink {
+              0%, 90%, 100% { color: #0a3978; text-shadow: 0 2px 8px #fff, 0 0 0 #ff9800; }
+              45% { color: #ff9800; text-shadow: 0 2px 8px #ff9800, 0 0 8px #fff; }
+            }
+          `}</style>
+          <h2 style={{
+            color: '#0a3978',
+            fontSize: 36,
+            fontWeight: 700,
+            textAlign: 'center',
+            marginBottom: 36,
+            fontFamily: 'Playfair Display, serif',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+          }}>KHUYẾN MÃI ĐẶC BIỆT</h2>
+        <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Ưu đãi 1: Chào mừng */}
+          <div style={{ background: '#e3f2fd', borderRadius: 16, boxShadow: '0 2px 8px #90caf933', padding: 32, minWidth: 260, maxWidth: 340, flex: '1 1 260px', display: 'flex', flexDirection: 'column', alignItems: 'center', fontFamily: 'inherit', position: 'relative' }}>
+            <span style={{ position: 'absolute', top: 18, left: 18 }}>
+              {/* Icon: 🎉 */}
+              <span style={{ fontSize: 32 }}>🎉</span>
+            </span>
+            <div style={{ fontWeight: 900, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 0.2, fontFamily: 'Playfair Display, serif' }}>Ưu đãi Chào mừng</div>
+            <div style={{ fontWeight: 700, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center' }}>Giảm ngay 10% cho chuyến đi đầu tiên của bạn!</div>
+            <div style={{ color: '#35507c', fontSize: 16, marginBottom: 18, textAlign: 'justify', fontWeight: 400, lineHeight: 1.7 }}>
+             Là thành viên mới, bạn sẽ được nhận ưu đãi đặc biệt này. Tiết kiệm chi phí cho chuyến đi đầu tiên, bắt đầu trải nghiệm dịch vụ chuyên nghiệp của chúng tôi ngay hôm nay.
+            </div>
+            <button onClick={() => router.push('/xe-di-san-bay/form')} style={{
+              background: '#0a3978',
+              color: '#fff',
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 700,
+              fontSize: 20,
+              border: 'none',
+              borderRadius: 8,
+              padding: '16px 0',
+              width: '100%',
+              cursor: 'pointer',
+              marginTop: 'auto',
+              boxShadow: '0 2px 8px #0a397822',
+              letterSpacing: 1.2,
+              textTransform: 'uppercase',
+              transition: 'background 0.2s',
+            }}>ĐẶT XE NGAY</button>
+          </div>
+          {/* ...rest of the file from app/xe-di-san-bay/page.tsx... */}
+        </div>
+      </section>
+    </main>
+  );
+}
+"use client";
+
+import React, { useCallback } from "react";
+import { useRouter } from 'next/navigation';
+
+export default function Page() {
+  const router = useRouter();
+  // State cho chatbot floating
+  const [chatOpen, setChatOpen] = React.useState(false);
+  const [messages, setMessages] = React.useState([
+    { from: 'bot', text: 'Xin chào, tôi có thể giúp bạn điều gì?' }
+  ]);
+  const [input, setInput] = React.useState('');
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setMessages(msgs => [...msgs, { from: 'user', text: input }]);
+    setTimeout(() => {
+      setMessages(msgs => [...msgs, { from: 'bot', text: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm.' }]);
+    }, 700);
+    setInput('');
+  };
+
+  // ...existing code...
+  // Scroll to booking form
+  const scrollToBookingForm = useCallback(() => {
+    const el = document.getElementById('booking-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
+  return (
+    <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
+      {/* Hero Section */}
+      <section style={{ textAlign: 'center', padding: '48px 0 24px 0', background: 'none' }}>
+        <h1 style={{ color: '#0a3978', fontWeight: 800, fontSize: 32, marginBottom: 12, fontFamily: 'Segoe UI, Roboto, Arial, sans-serif', letterSpacing: 0.2, textTransform: 'uppercase' }}>
+          DỊCH VỤ XE ĐƯA ĐÓN SÂN BAY NỘI BÀI CHUYÊN NGHIỆP
+        </h1>
+        <div style={{ color: '#35507c', fontSize: 22, marginBottom: 28, fontWeight: 500 }}>
+          An tâm mọi hành trình – Giá tốt, uy tín, phục vụ 24/7
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
+          <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
+          <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+            0865910922
+          </a>
+          <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
+              <circle cx="16" cy="16" r="16" fill="#fff"/>
+              <path d="M16 6C10.477 6 6 10.029 6 15.2c0 2.29 1.01 4.36 2.68 5.97-.12.44-.44 1.62-.51 1.89-.08.28.1.27.21.25.09-.02 1.41-.2 2.77-.38C13.13 23.95 14.54 24.2 16 24.2c5.523 0 10-4.03 10-9.2S21.523 6 16 6Z" fill="#0a97f5"/>
+            </svg>
+            Zalo
+          </a>
+        </div>
+      </section>
+      {/* ƯU ĐÃI ĐẶC BIỆT */}
+      <section style={{ maxWidth: 1100, margin: '48px auto 0', padding: '0 16px' }}>
+          <style>{`
+            @keyframes blink {
+              0%, 90%, 100% { color: #0a3978; text-shadow: 0 2px 8px #fff, 0 0 0 #ff9800; }
+              45% { color: #ff9800; text-shadow: 0 2px 8px #ff9800, 0 0 8px #fff; }
+            }
+          `}</style>
+          <h2 style={{
+            color: '#0a3978',
+            fontSize: 36,
+            fontWeight: 700,
+            textAlign: 'center',
+            marginBottom: 36,
+            fontFamily: 'Playfair Display, serif',
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+          }}>KHUYẾN MÃI ĐẶC BIỆT</h2>
+        <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          {/* Ưu đãi 1: Chào mừng */}
+          <div style={{ background: '#e3f2fd', borderRadius: 16, boxShadow: '0 2px 8px #90caf933', padding: 32, minWidth: 260, maxWidth: 340, flex: '1 1 260px', display: 'flex', flexDirection: 'column', alignItems: 'center', fontFamily: 'inherit', position: 'relative' }}>
+            <span style={{ position: 'absolute', top: 18, left: 18 }}>
+              {/* Icon: 🎉 */}
+              <span style={{ fontSize: 32 }}>🎉</span>
+            </span>
+            <div style={{ fontWeight: 900, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center', textTransform: 'uppercase', letterSpacing: 0.2, fontFamily: 'Playfair Display, serif' }}>Ưu đãi Chào mừng</div>
+            <div style={{ fontWeight: 700, color: '#0a3978', fontSize: 18, marginBottom: 10, textAlign: 'center' }}>Giảm ngay 10% cho chuyến đi đầu tiên của bạn!</div>
+            <div style={{ color: '#35507c', fontSize: 16, marginBottom: 18, textAlign: 'justify', fontWeight: 400, lineHeight: 1.7 }}>
+             Là thành viên mới, bạn sẽ được nhận ưu đãi đặc biệt này. Tiết kiệm chi phí cho chuyến đi đầu tiên, bắt đầu trải nghiệm dịch vụ chuyên nghiệp của chúng tôi ngay hôm nay.
+            </div>
+            <button onClick={() => router.push('/xe-di-san-bay/form')} style={{
+              background: '#0a3978',
+              color: '#fff',
+              fontFamily: 'Playfair Display, serif',
+              fontWeight: 700,
+              fontSize: 20,
+              border: 'none',
+              borderRadius: 8,
+              padding: '16px 0',
+              width: '100%',
+              cursor: 'pointer',
+              marginTop: 'auto',
+              boxShadow: '0 2px 8px #0a397822',
+              letterSpacing: 1.2,
+              textTransform: 'uppercase',
+              transition: 'background 0.2s',
+            }}>ĐẶT XE NGAY</button>
+          </div>
+          {/* ...rest of the file from app/xe-di-san-bay/page.tsx... */}
+        </div>
+      </section>
+    </main>
+  );
+}
 import Image from "next/image";
 
-export default function Home() {
+ "use client";
+
+ import React, { useCallback } from "react";
+ import { useRouter } from 'next/navigation';
+
+ export default function Page() {
+   const router = useRouter();
+   // State cho chatbot floating
+   const [chatOpen, setChatOpen] = React.useState(false);
+   const [messages, setMessages] = React.useState([
+     { from: 'bot', text: 'Xin chào, tôi có thể giúp bạn điều gì?' }
+   ]);
+   const [input, setInput] = React.useState('');
+   const handleSend = (e: React.FormEvent) => {
+     e.preventDefault();
+     if (!input.trim()) return;
+     setMessages(msgs => [...msgs, { from: 'user', text: input }]);
+     setTimeout(() => {
+       setMessages(msgs => [...msgs, { from: 'bot', text: 'Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm.' }]);
+     }, 700);
+     setInput('');
+   };
+
+   // ...existing code...
+   // Scroll to booking form
+   const scrollToBookingForm = useCallback(() => {
+     const el = document.getElementById('booking-form');
+     if (el) {
+       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+     }
+   }, []);
+
+   return (
+     <main style={{ background: '#fdf8e3', minHeight: '100vh' }}>
+       {/* Hero Section */}
+       <section style={{ textAlign: 'center', padding: '48px 0 24px 0', background: 'none' }}>
+         <h1 style={{ color: '#0a3978', fontWeight: 800, fontSize: 32, marginBottom: 12, fontFamily: 'Segoe UI, Roboto, Arial, sans-serif', letterSpacing: 0.2, textTransform: 'uppercase' }}>
+           DỊCH VỤ XE ĐƯA ĐÓN SÂN BAY NỘI BÀI CHUYÊN NGHIỆP
+         </h1>
+         <div style={{ color: '#35507c', fontSize: 22, marginBottom: 28, fontWeight: 500 }}>
+           An tâm mọi hành trình – Giá tốt, uy tín, phục vụ 24/7
+         </div>
+         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 18 }}>
+           <span style={{ fontWeight: 700, fontSize: 28, color: '#222' }}>Hotline:</span>
+           <a href="tel:0865910922" style={{ fontWeight: 800, fontSize: 32, color: 'orange', letterSpacing: 1, textDecoration: 'none', transition: 'color 0.2s' }} title="Gọi ngay">
+             0865910922
+           </a>
+           <a href="https://zalo.me/0865910922" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', background: '#0a97f5', color: '#fff', fontWeight: 700, fontSize: 18, borderRadius: 24, padding: '8px 22px', textDecoration: 'none', marginLeft: 8, boxShadow: '0 2px 8px #0a97f522', transition: 'background 0.2s' }}>
+             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none" style={{ marginRight: 8 }}>
+               <circle cx="16" cy="16" r="16" fill="#fff"/>
+               <path d="M16 6C10.477 6 6 10.029 6 15.2c0 2.29 1.01 4.36 2.68 5.97-.12.44-.44 1.62-.51 1.89-.08.28.1.27.21.25.09-.02 1.41-.2 2.77-.38C13.13 23.95 14.54 24.2 16 24.2c5.523 0 10-4.03 10-9.2S21.523 6 16 6Z" fill="#0a97f5"/>
+             </svg>
+             Zalo
+           </a>
+         </div>
+       </section>
+       {/* ...existing code... */}
+     </main>
+   );
+ }
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
