@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Script from 'next/script';
 import emailjs from '@emailjs/browser';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
@@ -80,7 +81,12 @@ export default function BookingForm() {
   };
 
   return (
-  <div style={{ background: '#fff', borderRadius: 18, boxShadow: '0 4px 24px #0a39781a', padding: 0, position: 'relative', maxWidth: 480, margin: '32px auto' }}>
+    <>
+      <Script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgzaSBtPwZ3aYVcW3xnNvLTl5uB_KpLiU&libraries=places"
+        strategy="beforeInteractive"
+      />
+      <div style={{ background: '#fff', borderRadius: 18, boxShadow: '0 4px 24px #0a39781a', padding: 0, position: 'relative', maxWidth: 480, margin: '32px auto' }}>
       {showSuccess && (
         <div style={{
           position: 'absolute',
@@ -354,5 +360,6 @@ export default function BookingForm() {
   <button type="submit" style={{ background: '#FFD600', color: '#0a3978', fontWeight: 700, fontSize: 20, border: 'none', borderRadius: 8, padding: '16px 0', marginTop: 8, cursor: 'pointer', fontFamily: 'inherit', letterSpacing: 1, boxShadow: '0 2px 8px #FFD60055', transition: 'background 0.2s', outline: 'none' }}>Đặt Xe</button>
       </form>
     </div>
+    </>
   );
 }
