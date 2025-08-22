@@ -2,6 +2,7 @@
 
 import React from "react";
 import emailjs from '@emailjs/browser';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 export default function BookingForm() {
   const [tab, setTab] = React.useState('noibai');
@@ -162,25 +163,55 @@ export default function BookingForm() {
             <label style={{ color: '#0a3978', fontWeight: 600, fontSize: 15, marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ fontSize: 18, color: '#FFD600' }}>📍</span>Điểm đón
             </label>
-            <input 
+            <PlacesAutocomplete
               value={pickup}
-              onChange={e => setPickup(e.target.value)}
-              placeholder="Nhập điểm đón"
-              style={{
-                width: '100%',
-                border: '1.5px solid #e0e0e0',
-                borderRadius: 10,
-                fontSize: 17,
-                padding: '12px 14px',
-                outline: 'none',
-                background: '#fff',
-                marginBottom: 2,
-                transition: 'border 0.2s',
-                boxSizing: 'border-box',
-              }}
-              onFocus={e => e.target.style.border = '1.5px solid #FFD600'}
-              onBlur={e => e.target.style.border = '1.5px solid #e0e0e0'}
-            />
+              onChange={setPickup}
+              onSelect={setPickup}
+              searchOptions={{ componentRestrictions: { country: ['vn'] } }}
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <div style={{ position: 'relative' }}>
+                  <input
+                    {...getInputProps({
+                      placeholder: 'Nhập điểm đón',
+                      style: {
+                        width: '100%',
+                        border: '1.5px solid #e0e0e0',
+                        borderRadius: 10,
+                        fontSize: 17,
+                        padding: '12px 14px',
+                        outline: 'none',
+                        background: '#fff',
+                        marginBottom: 2,
+                        transition: 'border 0.2s',
+                        boxSizing: 'border-box',
+                      },
+                      onFocus: e => e.target.style.border = '1.5px solid #FFD600',
+                      onBlur: e => e.target.style.border = '1.5px solid #e0e0e0',
+                    })}
+                  />
+                  {suggestions.length > 0 && (
+                    <div style={{ position: 'absolute', zIndex: 100, background: '#fff', border: '1px solid #eee', borderRadius: 8, width: '100%', boxShadow: '0 2px 8px #0001' }}>
+                      {loading && <div style={{ padding: 8 }}>Đang tìm kiếm...</div>}
+                      {suggestions.map(suggestion => (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            style: {
+                              padding: 10,
+                              background: suggestion.active ? '#f0f0f0' : '#fff',
+                              cursor: 'pointer',
+                            },
+                          })}
+                          key={suggestion.placeId}
+                        >
+                          {suggestion.description}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </PlacesAutocomplete>
             {errors['pickup'] && <div style={{ color: '#ff9800', fontSize: 13 }}>{errors['pickup']}</div>}
           </div>
           <button type="button" onClick={handleSwap} style={{ background: 'none', border: 'none', color: '#888', fontSize: 22, marginTop: 32, cursor: 'pointer', padding: 0, alignSelf: 'flex-end' }} title="Đảo chiều">⇅</button>
@@ -188,25 +219,55 @@ export default function BookingForm() {
             <label style={{ color: '#0a3978', fontWeight: 600, fontSize: 15, marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ fontSize: 18, color: '#7B1FA2' }}>�</span>Điểm đến
             </label>
-            <input 
+            <PlacesAutocomplete
               value={dropoff}
-              onChange={e => setDropoff(e.target.value)}
-              placeholder="Nhập điểm đến"
-              style={{
-                width: '100%',
-                border: '1.5px solid #e0e0e0',
-                borderRadius: 10,
-                fontSize: 17,
-                padding: '12px 14px',
-                outline: 'none',
-                background: '#fff',
-                marginBottom: 2,
-                transition: 'border 0.2s',
-                boxSizing: 'border-box',
-              }}
-              onFocus={e => e.target.style.border = '1.5px solid #7B1FA2'}
-              onBlur={e => e.target.style.border = '1.5px solid #e0e0e0'}
-            />
+              onChange={setDropoff}
+              onSelect={setDropoff}
+              searchOptions={{ componentRestrictions: { country: ['vn'] } }}
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <div style={{ position: 'relative' }}>
+                  <input
+                    {...getInputProps({
+                      placeholder: 'Nhập điểm đến',
+                      style: {
+                        width: '100%',
+                        border: '1.5px solid #e0e0e0',
+                        borderRadius: 10,
+                        fontSize: 17,
+                        padding: '12px 14px',
+                        outline: 'none',
+                        background: '#fff',
+                        marginBottom: 2,
+                        transition: 'border 0.2s',
+                        boxSizing: 'border-box',
+                      },
+                      onFocus: e => e.target.style.border = '1.5px solid #7B1FA2',
+                      onBlur: e => e.target.style.border = '1.5px solid #e0e0e0',
+                    })}
+                  />
+                  {suggestions.length > 0 && (
+                    <div style={{ position: 'absolute', zIndex: 100, background: '#fff', border: '1px solid #eee', borderRadius: 8, width: '100%', boxShadow: '0 2px 8px #0001' }}>
+                      {loading && <div style={{ padding: 8 }}>Đang tìm kiếm...</div>}
+                      {suggestions.map(suggestion => (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            style: {
+                              padding: 10,
+                              background: suggestion.active ? '#f0f0f0' : '#fff',
+                              cursor: 'pointer',
+                            },
+                          })}
+                          key={suggestion.placeId}
+                        >
+                          {suggestion.description}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </PlacesAutocomplete>
             {errors['dropoff'] && <div style={{ color: '#ff9800', fontSize: 13 }}>{errors['dropoff']}</div>}
           </div>
         </div>
