@@ -266,7 +266,7 @@ export default function Page() {
             </div>
             <div style={{ color: '#888', fontSize: 14, fontStyle: 'italic' }}>
               <div style={{ color: '#888', fontSize: 14, fontStyle: 'italic', textAlign: 'justify' }}>
-                (Dịch: "Tôi rất ấn tượng với dịch vụ. Lái xe chuyên nghiệp, nói được tiếng Anh cơ bản và rất đúng giờ. Xe sạch sẽ và thoải mái. Rất đáng giới thiệu!")
+                (Dịch: &quot;Tôi rất ấn tượng với dịch vụ. Lái xe chuyên nghiệp, nói được tiếng Anh cơ bản và rất đúng giờ. Xe sạch sẽ và thoải mái. Rất đáng giới thiệu!&quot;)
               </div>
             </div>
           </div>
